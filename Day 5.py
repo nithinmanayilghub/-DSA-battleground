@@ -36,14 +36,17 @@ print(func.largestNumber(nums))
 from typing import List
 
 
+# Use binary search for finding  the peak value
 class Solution:
     def findPeakElement(self, nums: List[int]) -> int:
-        # create a sorted enumarted list based on key as the element in list
-        nums_new = sorted(list(enumerate(nums)), key=lambda x: x[1], reverse=True)
-        # return the index positiion of the largest number
-        return nums_new[0][0]
-
-
-nums = [3, 30, 34, 5, 9]
-func = Solution()
-print(func.largestNumber(nums))
+        l, r = 0, len(nums) - 1
+        while l <= r:
+            m = l + (r - l) // 2
+            # search the left neighbors if the left element is larger than middle element
+            if m > 0 and nums[m] < nums[m - 1]:
+                r = m - 1
+            # search the right neighbors if the right element is larger than middle elemnt
+            elif m < len(nums) - 1 and nums[m] < nums[m + 1]:
+                l = m + 1
+            else:
+                return m
