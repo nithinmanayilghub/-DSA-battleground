@@ -40,7 +40,7 @@ def find_start_end_pos(nums: List[int], target=int) -> List[int]:
         # Check if nums equal target if yes append the index position to result
         if nums[i] == target:
             res.append(i)
-    # Check if the final result is an empty list. if yes return [-1,-1]
+    # Check if the final result is an empty list. if yes return [-1]
     if res == []:
         return [-1, -1]
     return res
@@ -57,3 +57,43 @@ nums = []
 target = 0
 
 print(find_start_end_pos(nums, target))
+
+
+########################## EFFICIENT SOLUTION ################################################
+def length_last_word(s: str) -> int:
+    words = (
+        s.strip().split()
+    )  # `strip()` removes leading/trailing spaces, `split()` tokenizes words
+    return len(words[-1]) if words else 0  # Handle case where words list is empty
+
+
+s = " fly me to the moon "
+print(length_last_word(s))
+
+########
+
+from typing import List
+import bisect
+
+
+def find_start_end_pos(nums: List[int], target: int) -> List[int]:
+    if not nums:
+        return [-1, -1]
+
+    left = bisect.bisect_left(nums, target)  # Find leftmost index of target
+    right = bisect.bisect_right(nums, target) - 1  # Find rightmost index
+
+    if left <= right and 0 <= left < len(nums):
+        return [left, right]
+    return [-1, -1]
+
+
+# Test cases
+nums = [5, 7, 7, 8, 8, 10]
+print(find_start_end_pos(nums, 8))  # Output: [3, 4]
+
+nums = [5, 7, 7, 8, 8, 10]
+print(find_start_end_pos(nums, 6))  # Output: [-1, -1]
+
+nums = []
+print(find_start_end_pos(nums, 0))  # Output: [-1, -1]
