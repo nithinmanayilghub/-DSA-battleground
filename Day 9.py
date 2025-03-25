@@ -62,3 +62,9 @@ func = Solution()
 strs = ["aba", "cdc", "eae"]
 
 print(func.findLUSlength(strs))
+
+"""
+Simulate what's going on inside the code using the exmaple input. 
+The goal is to undersand what happens at each line of code on a given Input. 
+Print the output for an absolute beginner
+"""
